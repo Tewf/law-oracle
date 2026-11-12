@@ -9,4 +9,5 @@ A pin move is recorded here, not in decisions/.
 
 - Pinned reader-ergonomics v1.24.2 (`65e4247`), at the repository's start: the standard's pin, link, changelog and
   decision-record checks, which this skeleton is written to pass.
+- B1's first run: Catala 1.3.0 on catala-examples `9e251b9`, in evidence/baseline-runs.md.
 - The review of statutes as code, in the shapes of reader-ergonomics-review v0.1.1 (`39d3b25`), and decisions 0001 to 0003.
