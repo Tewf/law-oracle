@@ -1,0 +1,17 @@
+// The verdict and its three layers. Colours: program blue, person orange; the repository's own layer has the thick border.
+digraph verdict {
+  graph [rankdir=LR, nodesep=0.4, ranksep=0.5, bgcolor="white", pad=0.2, fontname="Inter"];
+  node  [shape=box, style="rounded,filled", fontname="Inter", fontsize=13, margin="0.2,0.1", penwidth=1.5, fontcolor="#1F2328"];
+  edge  [fontname="Inter", fontsize=11, color="#3D434B", fontcolor="#55575F", penwidth=1.3, arrowsize=0.8];
+  S [label=<<b>statute and facts</b><br/><font point-size="11" color="#55575F">the article read at its source</font>>, fillcolor="#FFFFFF", color="#3D434B"];
+  C [label=<<b>Catala encoding</b><br/><font point-size="11" color="#55575F">default logic for exceptions</font>>, fillcolor="#E8EEF8", color="#2F5DA8", penwidth=2.6];
+  Z [label=<<b>Z3</b><br/><font point-size="11" color="#55575F">no empty, no conflict, disagreements</font>>, fillcolor="#E8EEF8", color="#2F5DA8"];
+  L [label=<<b>Lean</b><br/><font point-size="11" color="#55575F">claims for every case</font>>, fillcolor="#E8EEF8", color="#2F5DA8"];
+  Y [label=<<b>yes or no</b><br/><font point-size="11" color="#55575F">with the trace</font>>, fillcolor="#FFFFFF", color="#3D434B"];
+  N [label=<<b>not decided by the text</b><br/><font point-size="11" color="#55575F">one question for a jurist</font>>, fillcolor="#FBEDE4", color="#B4541A"];
+  S -> C [label=" encoded"];
+  C -> Z [label=" checked"];
+  C -> L [label=" modelled, tested"];
+  C -> Y [label=" run"];
+  C -> N [label=" empty or conflict"];
+}
