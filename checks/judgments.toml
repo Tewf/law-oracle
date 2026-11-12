@@ -1,0 +1,55 @@
+[[answer]]
+check = "tree-shape"
+path = "checks"
+question = "1 entries: fold into the parent folder, unless this folder is one record of a collection (a job, a chapter, a topic)."
+file = ""
+answer = "It stays: `checks` is the folder the extension contract names for the config and the answers, and the standard's runner reads it there."
+
+[[answer]]
+check = "logical-lines"
+path = "evidence/statutes-as-code/protocol.md"
+question = "85 logical lines, past the trigger of 80. State this file's role in one sentence. If the sentence needs 'and', split the file; if not, it may stay."
+file = "5ddc98e9838b"
+answer = "Its role in one sentence: how the pool was built, so the search can be run again; the length is the `## 4. Formal search` and `## 5. Grey search` tables, one row per string, which the shape requires whole."
+
+[[answer]]
+check = "logical-lines"
+path = "evidence/statutes-as-code/review.md"
+question = "128 logical lines, past the trigger of 80. State this file's role in one sentence. If the sentence needs 'and', split the file; if not, it may stay."
+file = "4cbab6ae2928"
+answer = "Its role in one sentence: the findings of the review by strand; the length is six strands from `## Strand 0: existing reviews` to `## Strand 5: Lean and other proof assistants on law`, one finding per line as the shape asks, so it stays one file."
+
+[[answer]]
+check = "figures-present"
+path = "evidence/statutes-as-code/review.md"
+question = "a long text with no figure, table or diagram: is a relation, set, quantity or process described only in words?"
+file = "4cbab6ae2928"
+answer = "No relation is left to words alone: each line is one finding with its source, as in `## Strand 3: a model translating a statute into logic (Q3)`; the one process the review argues for, the three layers and the three values, is drawn in the README's figure, and the comparisons are tables in state-of-the-art.md and baseline.md."
+
+[[answer]]
+check = "document-mode"
+path = "evidence/statutes-as-code/baseline.md"
+question = "reads about equally as reference and how-to: one mode per document?"
+file = "fcf6abe870d5"
+answer = "It is a reference: `## B1: Catala on its French encodings` and `## How it is measured` are looked up to compare against; the numbered lines name what B1 is, not steps to perform."
+
+[[answer]]
+check = "name-content"
+path = "evidence/statutes-as-code/frame.md"
+question = "the name 'frame' and the opening are far apart in meaning (0.15): does the name predict the content?"
+file = "3003c91b74ec"
+answer = "The name is the review genre's: `**Shape:** [frame]` declares it, and the opening says it is `Step 1 of the review`, which is what the frame is in reader-ergonomics-review."
+
+[[answer]]
+check = "name-content"
+path = "evidence/statutes-as-code/state-of-the-art.md"
+question = "the name 'state' and the opening are far apart in meaning (0.17): does the name predict the content?"
+file = "ae4402b47de6"
+answer = "The name is the review genre's step 3: `**Shape:** [state of the art]` declares it, and the opening says `Step 3 of the review`, the records per question."
+
+[[answer]]
+check = "section-cohesion"
+path = "evidence/statutes-as-code/frame.md"
+question = "section 'Held elsewhere' is far from every other section (0.23): a second role?"
+file = "3003c91b74ec"
+answer = "It is part of the frame's one role: `## Held elsewhere` is a part the frame shape prescribes, pointing to what neighbours hold so the frame's scope is read with its edges."

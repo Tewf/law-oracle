@@ -1,0 +1,122 @@
+string,result,concepts
+F1,Grimmelmann 2022,pl-and-law;defeasibility;m-language
+F1,Guintchev 2025,natural-vs-formal-language;automated-decision
+F1,Legislative Recipe 2021,machine-readable-legislation
+F1,Envisioning page,rules-as-code
+F2,Merigoux 2021,catala;default-logic;compiler-proof;bug-in-official-implementation;rules-as-code
+F2,Merigoux 2021b,m-language;french-tax-code;compiler
+F3,Nguyen 2023,abduction
+F3,Janatian 2023,llm-to-formal;expert-system;human-comparison
+F3,Wijayakoon 2025,smart-contracts
+F3,Chen 2025,llm-to-formal;smt;case-level-testing;autoformalization
+F3,Horner 2025,llm-to-formal;defeasible-deontic-logic
+F3,Wang 2026a,faithfulness;hidden-assumptions
+F3,Zheng 2026,legal-philosophy;interpretation
+F3,Sehgal 2025,llm-extraction-solver-reasoning;prolog
+F3,Fan 2025,rule-induction;precedent
+F3,Qian 2026,letter-vs-spirit;interpretation
+F3,Kuo 2023,
+F3,Xu 2026b,legal-propositions
+F3,Zhang 2025,first-order-logic;judgment-prediction
+F3,Huang 2026,temporal-versions
+F3,Shao 2025,survey-llm-law
+F3,Kant 2025,llm-extraction-solver-reasoning;guided-encoding
+F3,Tilwani 2026,neuro-symbolic;rag
+F3,Tornberg 2024,
+F3,Putta 2026,overruled-precedent
+F3,Zambrano 2025,judge-variable;legal-realism
+G1,Kowalski L4 Logical English,l4;logical-english;controlled-natural-language
+G2,LegalRuleML pages,legalruleml;defeasibility;deontic-logic;standard
+G3,Blawx pages,blawx;s-casp;answer-set-programming;explanations
+G4,COLIEE 2025 pages,coliee;yes-no-entailment;llm-ensemble
+G5,Lean law pages,lean;lawlib;statute-vs-practice;catala;msr-lean-law
+F4,Annenkov 2020,smart-contracts;coq
+F4,Benzmuller 2020,isabelle;value-balancing;logikey
+F4,Annenkov 2021,smart-contracts;coq
+F4,Annenkov 2019,smart-contracts;coq
+F4,Bernardo 2021,smart-contracts;coq
+F4,Yang 2018,smart-contracts;coq
+F4,Coelho 2026,lean;finance;faithfulness-audit
+F4,Nielsen 2019,smart-contracts;coq
+F4,Annenkov 2021b,financial-contracts;coq
+F4,El-Beheiry 2021,
+F4,Bernardo 2019,smart-contracts;coq
+F4,Woodcock 2026a,llm-proof;edit-contract
+F4,Yang 2019,smart-contracts;coq
+F4,Woodcock 2026b,llm-proof;edit-contract;weakened-theorem
+F4,Spector-Zabusky 2017,
+F4,Klimm 2026,
+F4,Nielsen 2022,smart-contracts;coq
+F4,Ivanov 2026,
+F4,Corbyn 2024,
+F4,Vazou 2016,
+G6,SARA pages,sara;prolog;gpt4-fails;llm-to-formal
+G7,LegalBench pages,legalbench;rule-application;rule-conclusion;interpretation
+G8,gh repos rules as code,blawx;rules-as-code;openfisca
+F5,Merigoux 2021,catala
+F5,Gonzalez 2026,
+F5,Candela 2020,
+F5,Gonzalez 2026b,
+F5,OHerlihy 2026,defensibility;ambiguity
+F5,Heydari 2026,catala;llm-to-formal;explanations-from-trace;open-texture-structural
+G9,lawlib search,lawlib;statute-vs-practice;differential-testing
+G10,Sergot pages,british-nationality-act;prolog;logic-programming-seminal
+G11,Prakken Sartor pages,survey-law-and-logic;argumentation;defeasibility
+G12,COHUBICOL and Hart pages,open-texture;rules-as-code-critique;legal-effect
+F6,Jurayj 2025,sara;prolog;llm-to-formal;cost-of-errors
+F6,Dou 2026a,deonticbench;prolog;llm-to-formal;rl-for-programs
+F6,Holzenberger 2021,sara;decomposition
+F6,Holzenberger 2020,sara;prolog
+F6,Dou 2026b,deonticbench;agentic
+F6,Hou 2024,hallucination;gaps
+F6,Blair-Stanek 2023,sara;synthetic-statutes
+F6,Jurayj 2022,
+F6,Jurayj 2025b,abstention
+F6,Holzenberger 2018,
+F6,Haffoudhi 2026,
+F6,Holzenberger 2022,
+G13,Lawsky pages,default-logic;priority-rules;standards-vs-rules
+G14,Catala LLM pages,catala;llm-to-formal;french-tax-code;catala-benchmark
+F7,Chen 2025,smt
+F7,Wang 2026b,faithfulness;scope-laundering;smt
+F7,Abdalla 2026,
+F7,Bellier 2023,
+F7,Kouteili 2026,abstention;first-order-logic;benchmark-generation
+G15,OpenFisca pages,openfisca;m-language;mes-aides
+G16,catala-examples tree,catala;french-tax-code;explanations-from-trace;z3-proof
+G17,COLIEE 2024 pages,coliee;yes-no-entailment
+F8,Wang 2026b,scope-laundering
+G18,Logical English LLM pages,logical-english;llm-to-formal;highway-code
+F9,Sun 2024,explanations
+F9,Merigoux 2021,catala
+F9,Sehgal 2025,prolog
+F9,Sartor 2025,logical-english;prolog
+F9,Saka 2026,extractor-disagreement;certificate
+F9,Atf 2025,
+F9,Jiang 2026,
+F9,Dovier 2026,answer-set-programming;explanations;rule-induction
+F9,Su 2026,
+F9,Heydari 2026,explanations-from-trace
+F9,Ostendorff 2020,
+F9,Borges 2023,ln2fr
+G19,gh code search,deonticbench;legalbench;logical-english;coliee
+G20,DeonticBench README,deonticbench;reference-program-audit
+G21,Kordjamshidi pages,contamination;neuro-symbolic
+G22,Vernie pages,formalization-comparison;sat-disagreement;verbalized-edge-cases
+F10,Rashie 2026,lean;autoformalization;compliance-guardrail;aristotle
+F10,Gokden 2026,
+F10,Li 2025,
+F10,Abdalla 2026,lean
+F10,Koomullil 2026b,lean;certificate;abstention
+F10,Smith-Vaniz 2025,
+F10,Schaeffer 2025,
+F10,De 2026,neuro-symbolic;numeric-checker
+F10,Ceron 2024,
+F10,Zheng 2025b,first-order-logic;theorem-prover-check
+F10,Bao 2025,lean;oracle-reward;contradiction
+F10,Zhang 2025b,
+F10,Zhou 2026,lean
+F10,Zhou 2025,lean
+F10,Pagan 2026,
+G23,Bench-Capon pages,isomorphism;faithfulness
+G24,Hart pages,open-texture;discretion;vagueness
