@@ -77,6 +77,19 @@ digraph verdict {
 - **B2**, for the sibling: DeonticBench's symbolic setting ([guangyaodou/DeonticBench](https://github.com/guangyaodou/DeonticBench)).
 - How each is measured: [baseline](evidence/statutes-as-code/baseline.md); the record: [0003](decisions/0003-measure-against-catala-and-deonticbench.md).
 
+## Next: what makes its claims testable
+
+Three deliverables, each a measure another project can rely on. None is started.
+
+1. **The proof backend on a real encoding.** Catala is built with its Z3 bindings and run on the family-allowances
+   encoding of B1. Each empty error (a case no rule decides) and conflict error (a case two rules decide) is shown as a
+   case. This measures whether completeness and consistency checks find anything real.
+2. **A disagreement enumerator.** Given two Catala encodings of one provision, Z3 lists the input cases where their
+   decisions differ (the measure of Vernie 2026). It is the instrument that scores a second encoding against a reference,
+   which the sibling [ai-augmented-law-oracle](https://github.com/Tewf/ai-augmented-law-oracle) needs.
+3. **The first encoding of our own,** of a provision whose reference encoding exists, so that it can be compared by
+   decisions from its first day.
+
 ## Layout
 
 - [evidence/](evidence/README.md): the review, its search log, the bibliography, and the [baseline runs](evidence/baseline-runs.md).
