@@ -7,6 +7,9 @@ A pin move is recorded here, not in decisions/.
 
 ### Added
 
+- The site: Quarto renders the README and every page, with the standard's stylesheet at its pin, and `pages.yml`
+  publishes it to https://tewf.github.io/law-oracle/ on every push to master, as the family's other members do.
+
 - Pinned reader-ergonomics v1.24.2 (`65e4247`), at the repository's start: the standard's pin, link, changelog and
   decision-record checks, which this skeleton is written to pass.
 - B1's first run: Catala 1.3.0 on catala-examples `9e251b9`, in evidence/baseline-runs.md.

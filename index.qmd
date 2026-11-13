@@ -1,0 +1,5 @@
+---
+title: "Law oracle: statutes written as checked code"
+---
+
+{{< include README.md >}}
