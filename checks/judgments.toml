@@ -53,3 +53,10 @@ path = "evidence/statutes-as-code/frame.md"
 question = "section 'Held elsewhere' is far from every other section (0.23): a second role?"
 file = "3003c91b74ec"
 answer = "It is part of the frame's one role: `## Held elsewhere` is a part the frame shape prescribes, pointing to what neighbours hold so the frame's scope is read with its edges."
+
+[[answer]]
+check = "tree-shape"
+path = "retractation/tests"
+question = "1 entries: fold into the parent folder, unless this folder is one record of a collection (a job, a chapter, a topic)."
+file = ""
+answer = "It stays: its one entry, `tests_retractation.catala_fr`, is the test module that `clerk.toml` builds apart from the module it tests, as catala-examples does for each of its encodings."

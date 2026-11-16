@@ -7,3 +7,7 @@ _standard/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Catala build outputs
+_build/
+_targets/

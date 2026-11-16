@@ -6,9 +6,10 @@ A statute written as code that a program checks, so that a question about a case
 question the text does not settle is said to be one. The field calls this **rules as code**, and applying a statute to
 facts **statutory reasoning**; "oracle" is meant in the testing sense, an answer trusted because it was checked.
 
-> **Status (2026-11-12):** the literature review is done, as a first pass of 46 sources, and names two baselines. Three
+> **Status (2026-11-16):** the literature review is done, as a first pass of 46 sources, and names two baselines. Three
 > decisions are taken. B1 ran as it is: 189 of 189 tests of Catala's examples pass ([runs](evidence/baseline-runs.md)).
-> Nothing of our own is encoded yet.
+> The first encoding of our own is [retractation/](retractation/README.md), the right of withdrawal from a distance
+> sale: 35 tests pass; the proof backend has not run on it.
 >
 > **How it is made:** with Claude, an AI assistant by Anthropic, under the maintainer's direction, the way
 > reader-ergonomics was made. Every figure in the review was read in an abstract or a summary and is marked so.
@@ -92,6 +93,7 @@ Three deliverables, each a measure another project can rely on. None is started.
 
 ## Layout
 
+- [retractation/](retractation/README.md): the right of withdrawal from a distance sale, in Catala, with its tests.
 - [evidence/](evidence/README.md): the review, its search log, the bibliography, and the [baseline runs](evidence/baseline-runs.md).
 - [decisions/](decisions/README.md): the records of this repository's choices.
 - [checks/](checks/config.toml): the configuration of the standard's checks.

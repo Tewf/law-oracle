@@ -1,0 +1,8 @@
+[project]
+name = "law-oracle"
+include_dirs = ["retractation"]
+
+[[target]]
+name = "retractation"
+modules = ["Retractation_distance"]
+tests = ["retractation/tests/"]

@@ -7,6 +7,9 @@ A pin move is recorded here, not in decisions/.
 
 ### Added
 
+- The first encoding of our own, in `retractation/`: the right of withdrawal from a distance sale (Code de la
+  consommation, L. 221-18 to L. 221-21 and L. 221-28), in Catala 1.3.0, with 35 tests and a grid of 148,256 cases
+  compared with a second program and a monotonicity property; `clerk.toml` declares it as a Catala project.
 - The site: Quarto renders the README and every page, with the standard's stylesheet at its pin, and `pages.yml`
   publishes it to https://tewf.github.io/law-oracle/ on every push to master, as the family's other members do.
 

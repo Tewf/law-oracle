@@ -1,0 +1,486 @@
+> Usage de Retractation_distance en tant que R
+
+# Tests du délai de rétractation
+
+Chaque cas est calculé à la main depuis les articles, avant d'être écrit ici ; le jour
+de la semaine de chaque date a été vérifié par un programme. Le jour de départ n'est
+pas compté (L. 221-19, 1°) : le dernier jour est le départ plus quatorze jours.
+
+Le cas de base : un bien commandé le lundi 2 novembre 2026, reçu le jeudi 5,
+l'information donnée avant la conclusion. Chaque test n'en change que ce qu'il dit.
+
+```catala
+déclaration champ d'application Base:
+  contexte type_de_contrat contenu R.TypeDeContrat
+  contexte modalité contenu R.ModalitéDeLivraison
+  contexte réception contenu liste de date
+  contexte complète contenu booléen
+  contexte information contenu R.InformationSurLeDroit
+  contexte cas contenu liste de R.CasL22128
+  d champ d'application R.DélaiDeRétractation
+  résultat droit contenu booléen
+  résultat commencé contenu booléen
+  résultat départ contenu date
+  résultat fin_initiale contenu date
+  résultat fin contenu R.FinDuDélai
+  résultat dans_le_délai contenu R.Verdict dépend de envoi contenu date
+
+champ d'application Base:
+  définition type_de_contrat égal à VenteDeBiens
+  définition modalité égal à UnSeulBien
+  définition réception égal à [|2026-11-05|]
+  définition complète égal à vrai
+  définition information égal à FournieAvantLaConclusion
+  définition cas égal à []
+  définition d.type_de_contrat égal à type_de_contrat
+  définition d.date_de_conclusion égal à |2026-11-02|
+  définition d.modalité_de_livraison égal à modalité
+  définition d.dates_de_réception égal à réception
+  définition d.réception_complète égal à complète
+  définition d.information égal à information
+  définition d.cas_l221_28 égal à cas
+  définition d.jours_fériés_ou_chômés égal à [|2026-12-25|; |2027-03-29|]
+  définition droit égal à d.droit_de_rétractation
+  définition commencé égal à d.délai_commencé
+  définition départ égal à d.jour_de_départ
+  définition fin_initiale égal à d.fin_du_délai_initial
+  définition fin égal à d.fin_du_délai
+  définition dans_le_délai de envoi égal à d.dans_le_délai de envoi
+
+# Une information tardive fournie et reçue le même jour.
+déclaration tardive contenu R.InformationSurLeDroit
+  dépend de jour_fourni contenu date
+  égal à FournieAprèsLaConclusion contenu
+    R.InformationTardive { -- fournie_le: jour_fourni -- reçue_le: jour_fourni }
+```
+
+## L. 221-18 et L. 221-19 : le délai initial
+
+```catala
+# Reçu le jeudi 5 novembre : le dernier jour est le jeudi 19.
+#[test]
+déclaration champ d'application UnBien:
+  base champ d'application Base
+
+champ d'application UnBien:
+  assertion base.droit
+  assertion base.commencé
+  assertion base.départ = |2026-11-05|
+  assertion base.fin = Le contenu |2026-11-19|
+  # Un envoi le dernier jour est dans le délai (L. 221-19, 2°), le lendemain non.
+  assertion base.dans_le_délai de |2026-11-19| = Oui
+  assertion base.dans_le_délai de |2026-11-20| = Non
+  # Avant la conclusion, il n'y a rien à rétracter. Entre la conclusion et la
+  # réception, le texte ne tranche pas. Le jour de la réception, l'envoi est dans le
+  # délai : L. 221-21 ne fixe qu'une borne, « avant l'expiration ».
+  assertion base.dans_le_délai de |2026-10-01| = Non
+  assertion base.dans_le_délai de |2026-11-05| = Oui
+  assertion base.dans_le_délai de |2026-11-04| =
+    NonDécidé contenu EnvoiAvantLOuvertureDuDélai
+
+# Reçu le samedi 7 : le 21 est un samedi, prorogé au lundi 23 (L. 221-19, 3°).
+#[test]
+déclaration champ d'application FinUnSamedi:
+  base champ d'application Base
+
+champ d'application FinUnSamedi:
+  définition base.réception égal à [|2026-11-07|]
+  assertion base.fin = Le contenu |2026-11-23|
+
+# Reçu le dimanche 14 mars 2027 : le 28 est le dimanche de Pâques, le 29 le lundi
+# de Pâques, férié ; le délai finit le mardi 30.
+#[test]
+déclaration champ d'application FinUnDimanchePuisFérié:
+  base champ d'application Base
+
+champ d'application FinUnDimanchePuisFérié:
+  définition base.réception égal à [|2027-03-14|]
+  assertion base.fin = Le contenu |2027-03-30|
+
+# Une prestation de services court de la conclusion, le lundi 2 : fin le lundi 16.
+#[test]
+déclaration champ d'application Service:
+  base champ d'application Base
+
+champ d'application Service:
+  définition base.type_de_contrat égal à PrestationDeServices
+  définition base.réception égal à []
+  assertion base.départ = |2026-11-02|
+  assertion base.fin = Le contenu |2026-11-16|
+  # Pour un service, l'envoi le jour de la conclusion est dans le délai : la phrase
+  # a contrario de L. 221-18, 2°, ne vise que les biens.
+  assertion base.dans_le_délai de |2026-11-02| = Oui
+
+# Un contrat de L. 221-4 (contenu numérique sans support) court de la conclusion.
+#[test]
+déclaration champ d'application ContratL2214:
+  base champ d'application Base
+
+champ d'application ContratL2214:
+  définition base.type_de_contrat égal à FournitureArticleL2214
+  assertion base.départ = |2026-11-02|
+  assertion base.fin = Le contenu |2026-11-16|
+
+# Plusieurs biens livrés séparément : le délai court du dernier, le 10 ; fin le 24.
+#[test]
+déclaration champ d'application PlusieursBiens:
+  base champ d'application Base
+
+champ d'application PlusieursBiens:
+  définition base.modalité égal à PlusieursBiensLivrésSéparément
+  définition base.réception égal à [|2026-11-10|; |2026-11-05|]
+  assertion base.départ = |2026-11-10|
+  assertion base.fin = Le contenu |2026-11-24|
+
+# Un bien en lots échelonnés : du dernier lot, le jeudi 12 ; fin le jeudi 26.
+#[test]
+déclaration champ d'application Lots:
+  base champ d'application Base
+
+champ d'application Lots:
+  définition base.modalité égal à BienEnLotsOuPiècesÉchelonnés
+  définition base.réception égal à [|2026-11-05|; |2026-11-12|]
+  assertion base.départ = |2026-11-12|
+  assertion base.fin = Le contenu |2026-11-26|
+
+# Deux biens commandés, un seul reçu le 5 : le délai court du dernier, il n'a pas
+# commencé.
+#[test]
+déclaration champ d'application LivraisonIncomplète:
+  base champ d'application Base
+
+champ d'application LivraisonIncomplète:
+  définition base.modalité égal à PlusieursBiensLivrésSéparément
+  définition base.complète égal à faux
+  assertion non base.commencé
+  assertion base.fin = PasEncoreCommencé
+  assertion base.dans_le_délai de |2026-11-25| =
+    NonDécidé contenu EnvoiAvantLOuvertureDuDélai
+
+# Une livraison régulière court du premier bien reçu, le 5 ; fin le 19.
+#[test]
+déclaration champ d'application LivraisonRégulière:
+  base champ d'application Base
+
+champ d'application LivraisonRégulière:
+  définition base.modalité égal à LivraisonRégulièrePendantUnePériode
+  définition base.réception égal à [|2026-12-05|; |2026-11-05|]
+  assertion base.départ = |2026-11-05|
+  assertion base.fin = Le contenu |2026-11-19|
+
+# Un bien pas encore reçu : le délai n'a pas commencé.
+#[test]
+déclaration champ d'application PasEncoreReçu:
+  base champ d'application Base
+
+champ d'application PasEncoreReçu:
+  définition base.réception égal à []
+  assertion non base.commencé
+  assertion base.fin = PasEncoreCommencé
+  assertion base.dans_le_délai de |2026-11-03| =
+    NonDécidé contenu EnvoiAvantLOuvertureDuDélai
+  assertion base.dans_le_délai de |2026-10-01| = Non
+```
+
+## L. 221-28 : pas de droit, ou un droit perdu
+
+```catala
+# Un parfum nettement personnalisé (3°) : le droit ne peut être exercé.
+#[test]
+déclaration champ d'application BienPersonnalisé:
+  base champ d'application Base
+
+champ d'application BienPersonnalisé:
+  définition base.cas égal à [Al3BienPersonnalisé]
+  assertion non base.droit
+  assertion base.fin = PasDeDroit
+  assertion base.dans_le_délai de |2026-11-06| = Non
+
+# Le 3° et le 5° à la fois, sans information : le 3° l'emporte, pas de droit.
+#[test]
+déclaration champ d'application DeuxCasSansInformation:
+  base champ d'application Base
+
+champ d'application DeuxCasSansInformation:
+  définition base.cas égal à
+    [Al3BienPersonnalisé; Al5BienDescelléHygiène contenu |2026-11-06|]
+  définition base.information égal à JamaisFournie
+  assertion base.fin = PasDeDroit
+
+# Un flacon descellé le dimanche 8 (5°) : le droit existe jusque-là. Envoyé le 7, la
+# rétractation est faite ; le 9, le droit est perdu ; le 8, on ne sait lequel vint
+# le premier.
+#[test]
+déclaration champ d'application Descellé:
+  base champ d'application Base
+
+champ d'application Descellé:
+  définition base.cas égal à [Al5BienDescelléHygiène contenu |2026-11-08|]
+  assertion base.droit
+  assertion base.fin = Le contenu |2026-11-19|
+  assertion base.dans_le_délai de |2026-11-07| = Oui
+  assertion base.dans_le_délai de |2026-11-08| =
+    NonDécidé contenu PerteDuDroitLeJourDeLEnvoi
+  assertion base.dans_le_délai de |2026-11-09| = Non
+
+# Un bien mélangé de manière indissociable le mardi 10 (6°) : envoyée le 9, la
+# rétractation est faite ; le 11, le droit est perdu.
+#[test]
+déclaration champ d'application Mélangé:
+  base champ d'application Base
+
+champ d'application Mélangé:
+  définition base.cas égal à [Al6BienMélangéIndissociablement contenu |2026-11-10|]
+  assertion base.droit
+  assertion base.dans_le_délai de |2026-11-09| = Oui
+  assertion base.dans_le_délai de |2026-11-11| = Non
+
+# Descellé le mercredi 25, après la fin du délai le 19 : envoyée le 25, la
+# rétractation est tardive, quel que soit l'ordre des deux faits ce jour-là.
+#[test]
+déclaration champ d'application DescelléAprèsLeDélai:
+  base champ d'application Base
+
+champ d'application DescelléAprèsLeDélai:
+  définition base.cas égal à [Al5BienDescelléHygiène contenu |2026-11-25|]
+  assertion base.dans_le_délai de |2026-11-19| = Oui
+  assertion base.dans_le_délai de |2026-11-25| = Non
+
+# Un logiciel descellé le samedi 7 (9°) : envoyée le 6, faite ; le 7, l'ordre du
+# jour reste ouvert.
+#[test]
+déclaration champ d'application LogicielDescellé:
+  base champ d'application Base
+
+champ d'application LogicielDescellé:
+  définition base.cas égal à [Al9EnregistrementOuLogicielDescellé contenu |2026-11-07|]
+  assertion base.dans_le_délai de |2026-11-06| = Oui
+  assertion base.dans_le_délai de |2026-11-07| =
+    NonDécidé contenu PerteDuDroitLeJourDeLEnvoi
+
+# Un contenu numérique sans support conclu le 2, son exécution commencée le 4
+# (13°) : envoyée le 3, faite ; le 5, le droit est perdu.
+#[test]
+déclaration champ d'application ContenuNumériqueCommencé:
+  base champ d'application Base
+
+champ d'application ContenuNumériqueCommencé:
+  définition base.type_de_contrat égal à FournitureArticleL2214
+  définition base.cas égal à [Al13ContenuNumériqueCommencé contenu |2026-11-04|]
+  assertion base.dans_le_délai de |2026-11-03| = Oui
+  assertion base.dans_le_délai de |2026-11-05| = Non
+
+# Un service conclu le 2 et pleinement exécuté le 10 (1°) : envoyée le 4, la
+# rétractation est faite ; le 11, le droit est perdu.
+#[test]
+déclaration champ d'application ServiceExécuté:
+  base champ d'application Base
+
+champ d'application ServiceExécuté:
+  définition base.type_de_contrat égal à PrestationDeServices
+  définition base.cas égal à [Al1ServicePleinementExécuté contenu |2026-11-10|]
+  assertion base.dans_le_délai de |2026-11-04| = Oui
+  assertion base.dans_le_délai de |2026-11-11| = Non
+```
+
+## L. 221-20 : l'information manquante
+
+Avec le cas de base : départ D le 5 novembre 2026, fin initiale I le 19, fin de la
+prolongation P le vendredi 19 novembre 2027, douze mois de D, W, le vendredi 5
+novembre 2027.
+
+```catala
+# Jamais informé : la prolongation entière, P.
+#[test]
+déclaration champ d'application JamaisInformé:
+  base champ d'application Base
+
+champ d'application JamaisInformé:
+  définition base.information égal à JamaisFournie
+  assertion base.fin_initiale = |2026-11-19|
+  assertion base.fin = Le contenu |2027-11-19|
+  assertion base.dans_le_délai de |2027-11-19| = Oui
+
+# Reçu le vendredi 6 : I le vendredi 20 ; douze mois plus tard, samedi 20 novembre
+# 2027, prorogé au lundi 22.
+#[test]
+déclaration champ d'application ProlongationFinUnSamedi:
+  base champ d'application Base
+
+champ d'application ProlongationFinUnSamedi:
+  définition base.réception égal à [|2026-11-06|]
+  définition base.information égal à JamaisFournie
+  assertion base.fin = Le contenu |2027-11-22|
+
+# I le mardi 29 février 2028 ; février 2029 n'a pas de 29 : la prolongation finit le
+# dernier jour du mois, le mercredi 28 (règlement 1182/71, art. 3(2)(c)).
+#[test]
+déclaration champ d'application ProlongationAuVingtNeufFévrier:
+  base champ d'application Base
+
+champ d'application ProlongationAuVingtNeufFévrier:
+  définition base.réception égal à [|2028-02-15|]
+  définition base.information égal à JamaisFournie
+  assertion base.fin_initiale = |2028-02-29|
+  assertion base.fin = Le contenu |2029-02-28|
+
+# F avant D (le 3, entre la conclusion et la réception) : les deux textes donnent P.
+#[test]
+déclaration champ d'application InforméAvantLaRéception:
+  base champ d'application Base
+
+champ d'application InforméAvantLaRéception:
+  définition base.information égal à tardive de |2026-11-03|
+  assertion base.fin = Le contenu |2027-11-19|
+
+# F = D, le jour de la réception : la fenêtre de la directive ne compte pas ce jour
+# (règlement 1182/71, art. 3(1)) ; les deux textes donnent P.
+#[test]
+déclaration champ d'application FourniLeJourDeDépart:
+  base champ d'application Base
+
+champ d'application FourniLeJourDeDépart:
+  définition base.information égal à tardive de |2026-11-05|
+  assertion base.fin = Le contenu |2027-11-19|
+
+# F = D + 1, le vendredi 6 : les textes divergent ; quatorze jours, le vendredi 20.
+#[test]
+déclaration champ d'application FourniLeLendemainDeD:
+  base champ d'application Base
+
+champ d'application FourniLeLendemainDeD:
+  définition base.information égal à tardive de |2026-11-06|
+  assertion base.fin =
+    NonDécidéParLeTexte contenu R.Fourchette {
+      -- question: InformationFournieAvantLaProlongation
+      -- au_plus_tôt: |2026-11-20| -- au_plus_tard: |2027-11-19| }
+
+# F entre D et I : les textes divergent.
+#[test]
+déclaration champ d'application InforméAvantLaProlongation:
+  base champ d'application Base
+
+champ d'application InforméAvantLaProlongation:
+  définition base.information égal à tardive de |2026-11-10|
+  # Quatorze jours selon la directive : le mardi 24 novembre 2026 ; P selon la lettre.
+  assertion base.fin =
+    NonDécidéParLeTexte contenu R.Fourchette {
+      -- question: InformationFournieAvantLaProlongation -- au_plus_tôt: |2026-11-24| -- au_plus_tard: |2027-11-19| }
+  # Dans le délai selon les deux lectures, selon une seule, selon aucune.
+  assertion base.dans_le_délai de |2026-11-12| = Oui
+  assertion base.dans_le_délai de |2026-12-01| =
+    NonDécidé contenu InformationFournieAvantLaProlongation
+  assertion base.dans_le_délai de |2028-01-01| = Non
+
+# F = I exactement, reçue deux jours plus tard : c'est la fourniture qui compte, elle
+# n'est pas pendant la prolongation.
+#[test]
+déclaration champ d'application FourniLeDernierJourInitial:
+  base champ d'application Base
+
+champ d'application FourniLeDernierJourInitial:
+  définition base.information égal à
+    FournieAprèsLaConclusion contenu
+      R.InformationTardive { -- fournie_le: |2026-11-19| -- reçue_le: |2026-11-21| }
+  # Reçue le samedi 21 : quatorze jours, le samedi 5 décembre, prorogé au lundi 7.
+  assertion base.fin =
+    NonDécidéParLeTexte contenu R.Fourchette {
+      -- question: InformationFournieAvantLaProlongation -- au_plus_tôt: |2026-12-07| -- au_plus_tard: |2027-11-19| }
+
+# F = I + 1, le vendredi 20 : quatorze jours, le vendredi 4 décembre.
+#[test]
+déclaration champ d'application FourniLeLendemain:
+  base champ d'application Base
+
+champ d'application FourniLeLendemain:
+  définition base.information égal à tardive de |2026-11-20|
+  assertion base.fin = Le contenu |2026-12-04|
+
+# Informé le dimanche 10 janvier 2027, pendant la prolongation : quatorze jours, le
+# 24 est un dimanche, fin le lundi 25.
+#[test]
+déclaration champ d'application InforméPendantLaProlongation:
+  base champ d'application Base
+
+champ d'application InforméPendantLaProlongation:
+  définition base.information égal à tardive de |2027-01-10|
+  assertion base.fin = Le contenu |2027-01-25|
+
+# F = W exactement, le vendredi 5 novembre 2027 : quatorze jours, le vendredi 19.
+#[test]
+déclaration champ d'application FourniÀDouzeMois:
+  base champ d'application Base
+
+champ d'application FourniÀDouzeMois:
+  définition base.information égal à tardive de |2027-11-05|
+  assertion base.fin = Le contenu |2027-11-19|
+
+# Reçu le samedi 7 : D + 12 mois est le dimanche 7 novembre 2027, W le lundi 8.
+# Fourni le 8 : dans la fenêtre, quatorze jours, le lundi 22.
+#[test]
+déclaration champ d'application FenêtreProrogée:
+  base champ d'application Base
+
+champ d'application FenêtreProrogée:
+  définition base.réception égal à [|2026-11-07|]
+  définition base.information égal à tardive de |2027-11-08|
+  assertion base.fin = Le contenu |2027-11-22|
+
+# F entre W et P, le mercredi 10 novembre 2027 : les textes divergent.
+#[test]
+déclaration champ d'application InforméAprèsDouzeMois:
+  base champ d'application Base
+
+champ d'application InforméAprèsDouzeMois:
+  définition base.information égal à tardive de |2027-11-10|
+  # Quatorze jours selon la lettre : le mercredi 24 ; P selon la directive.
+  assertion base.fin =
+    NonDécidéParLeTexte contenu R.Fourchette {
+      -- question: InformationFournieAprèsDouzeMoisDuDépart -- au_plus_tôt: |2027-11-19| -- au_plus_tard: |2027-11-24| }
+  assertion base.dans_le_délai de |2027-11-19| = Oui
+  assertion base.dans_le_délai de |2027-11-22| =
+    NonDécidé contenu InformationFournieAprèsDouzeMoisDuDépart
+  assertion base.dans_le_délai de |2027-11-25| = Non
+
+# F = P exactement, le vendredi 19 novembre 2027 : après W, les textes divergent.
+#[test]
+déclaration champ d'application FourniLeDernierJourProlongé:
+  base champ d'application Base
+
+champ d'application FourniLeDernierJourProlongé:
+  définition base.information égal à tardive de |2027-11-19|
+  assertion base.fin =
+    NonDécidéParLeTexte contenu R.Fourchette {
+      -- question: InformationFournieAprèsDouzeMoisDuDépart -- au_plus_tôt: |2027-11-19| -- au_plus_tard: |2027-12-03| }
+
+# F = W + 1, le samedi 6 novembre 2027 : après W, les textes divergent ; quatorze
+# jours, le samedi 20, prorogé au lundi 22.
+#[test]
+déclaration champ d'application FourniLeLendemainDeW:
+  base champ d'application Base
+
+champ d'application FourniLeLendemainDeW:
+  définition base.information égal à tardive de |2027-11-06|
+  assertion base.fin =
+    NonDécidéParLeTexte contenu R.Fourchette {
+      -- question: InformationFournieAprèsDouzeMoisDuDépart -- au_plus_tôt: |2027-11-19| -- au_plus_tard: |2027-11-22| }
+
+# F = P + 1, le samedi 20 novembre 2027 : le délai a expiré la veille.
+#[test]
+déclaration champ d'application FourniLeLendemainDeP:
+  base champ d'application Base
+
+champ d'application FourniLeLendemainDeP:
+  définition base.information égal à tardive de |2027-11-20|
+  assertion base.fin = Le contenu |2027-11-19|
+
+# F après P, le 1er décembre 2027 : le délai a expiré le 19 novembre 2027.
+#[test]
+déclaration champ d'application InforméAprèsLaProlongation:
+  base champ d'application Base
+
+champ d'application InforméAprèsLaProlongation:
+  définition base.information égal à tardive de |2027-12-01|
+  assertion base.fin = Le contenu |2027-11-19|
+  assertion base.dans_le_délai de |2027-12-02| = Non
+```

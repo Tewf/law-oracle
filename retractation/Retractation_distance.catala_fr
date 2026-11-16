@@ -1,0 +1,528 @@
+> Module Retractation_distance
+
+# Le droit de rétractation d'un contrat conclu à distance
+
+Ce module encode le délai de rétractation d'un contrat conclu à distance, au sens du
+code de la consommation, livre II, titre II, chapitre Ier, section 3. Il répond à trois
+questions sur un cas : le droit existe-t-il, quand le délai finit-il, et une
+rétractation envoyée à une date donnée l'a-t-elle été dans le délai.
+
+Les textes sont lus dans les données ouvertes LEGI de la DILA (articles L. 221-4,
+L. 221-5 et L. 221-18 à L. 221-21 et L. 221-28, en vigueur), et dans EUR-Lex pour le règlement
+(CEE, Euratom) n° 1182/71 et la directive 2011/83/UE ; leur copie est dans
+`sources/`. Une réponse que le texte ne donne pas est rendue comme telle, avec la
+question qui la fermerait, jamais comme oui ou non.
+
+Hors du champ : les contrats hors établissement et le démarchage téléphonique (le
+même article les couvre, avec d'autres règles de départ), les effets de la
+rétractation (L. 221-23 à L. 221-27), et l'établissement des faits du cas.
+
+## Les données d'un cas
+
+```catala-metadata
+déclaration énumération TypeDeContrat:
+  -- PrestationDeServices
+  # L. 221-4 : eau, gaz ou électricité non conditionnés, chauffage urbain,
+  # contenu numérique sans support matériel.
+  -- FournitureArticleL2214
+  -- VenteDeBiens
+
+déclaration énumération ModalitéDeLivraison:
+  -- UnSeulBien
+  -- PlusieursBiensLivrésSéparément
+  -- BienEnLotsOuPiècesÉchelonnés
+  -- LivraisonRégulièrePendantUnePériode
+
+# L. 221-20 distingue deux jours : celui où l'information est fournie (« la
+# fourniture de ces informations intervient pendant cette prolongation ») et celui
+# où le consommateur la reçoit (le départ des quatorze jours).
+déclaration structure InformationTardive:
+  donnée fournie_le contenu date
+  donnée reçue_le contenu date
+
+# L. 221-5, I, 7° : l'information sur le droit, due « préalablement à la
+# conclusion ». Une information fournie après la conclusion est tardive.
+déclaration énumération InformationSurLeDroit:
+  -- FournieAvantLaConclusion
+  -- JamaisFournie
+  -- FournieAprèsLaConclusion contenu InformationTardive
+
+# Les treize cas de L. 221-28, dans l'ordre de l'article. Huit tiennent au type du
+# contrat. Cinq (1°, 5°, 6°, 9°, 13°) tiennent à un événement survenu pendant le
+# délai : leur date est donnée, et le droit est perdu à partir d'elle. Le cas n'est
+# donné que si toutes ses conditions sont réunies (pour le 1°, l'accord exprès et la
+# reconnaissance de la perte du droit ; pour le 13°, en plus, la confirmation de
+# l'accord par le professionnel, c).
+déclaration énumération CasL22128:
+  # 1° : le jour où le service est pleinement exécuté.
+  -- Al1ServicePleinementExécuté contenu date
+  -- Al2PrixSelonMarchéFinancier
+  -- Al3BienPersonnalisé
+  -- Al4BienPérissable
+  # 5° : le jour où le bien est descellé par le consommateur.
+  -- Al5BienDescelléHygiène contenu date
+  # 6° : le jour où le bien, après sa livraison, est mélangé de manière
+  # indissociable avec d'autres articles.
+  -- Al6BienMélangéIndissociablement contenu date
+  -- Al7BoissonAlcooliséeÀPrixDeMarché
+  -- Al8RéparationUrgente
+  # 9° : le jour où l'enregistrement ou le logiciel est descellé.
+  -- Al9EnregistrementOuLogicielDescellé contenu date
+  -- Al10JournalHorsAbonnement
+  -- Al11EnchèrePublique
+  -- Al12ServiceÀDateDéterminée
+  # 13° : le jour où l'exécution commence.
+  -- Al13ContenuNumériqueCommencé contenu date
+
+# Ce que le texte ne décide pas, chaque fois avec la question qui le déciderait.
+déclaration énumération QuestionOuverte:
+  # L. 221-20 n'abrège la prolongation que pour une information fournie « pendant
+  # cette prolongation » ; la directive 2011/83, art. 10(2), pour une information
+  # communiquée « dans un délai de douze mois à compter du jour visé à l'article 9,
+  # paragraphe 2 », le jour de départ. Fournie après le jour de départ et au plus
+  # tard à la fin du délai initial : prolongation de douze mois, ou quatorze jours ?
+  -- InformationFournieAvantLaProlongation
+  # Fournie pendant la prolongation, mais après les douze mois comptés du jour de
+  # départ : L. 221-20 donne quatorze jours, la directive, art. 10(1), la fin de la
+  # prolongation. Laquelle prévaut (directive d'harmonisation complète, art. 4) ?
+  -- InformationFournieAprèsDouzeMoisDuDépart
+  # Un bien vendu à distance, une rétractation envoyée après la conclusion mais avant
+  # la réception, jour de départ du délai. L. 221-18, 2°, ne permet d'exercer le droit
+  # dès la conclusion que « pour les contrats conclus hors établissement » ; L. 221-21
+  # ne fixe qu'une borne, « avant l'expiration ». A contrario, l'envoi est-il sans
+  # effet, ou le droit s'exerce-t-il dès la conclusion ?
+  -- EnvoiAvantLOuvertureDuDélai
+  # L'événement qui fait perdre le droit (L. 221-28, 1°, 5°, 6°, 9° ou 13°) a lieu le
+  # jour même de l'envoi : lequel est venu le premier, à l'heure près ?
+  -- PerteDuDroitLeJourDeLEnvoi
+
+# Quand le texte ne décide pas, chaque lecture donne sa fin : le verdict sur un
+# envoi n'est décidé que si les deux lectures le donnent (une date au plus tard à la
+# plus tôt des deux fins, ou après la plus tardive).
+déclaration structure Fourchette:
+  donnée question contenu QuestionOuverte
+  donnée au_plus_tôt contenu date
+  donnée au_plus_tard contenu date
+
+déclaration énumération FinDuDélai:
+  -- PasDeDroit
+  # Un bien pas encore reçu : le délai n'a pas commencé à courir.
+  -- PasEncoreCommencé
+  -- Le contenu date
+  -- NonDécidéParLeTexte contenu Fourchette
+
+
+déclaration énumération Verdict:
+  -- Oui
+  -- Non
+  -- NonDécidé contenu QuestionOuverte
+```
+
+## Le jour ouvrable suivant
+
+L. 221-19, 3° : si le délai expire un samedi, un dimanche ou un jour férié ou chômé,
+il est prorogé jusqu'au premier jour ouvrable suivant. Le règlement n° 1182/71,
+art. 3(4), dit la même chose de tout délai exprimé en jours, en mois ou en années ;
+le considérant 41 de la directive 2011/83 l'applique à tous les délais de la
+directive, donc aussi à ceux de L. 221-20. Les jours fériés ou chômés sont une donnée
+du cas : ils varient selon le lieu (l'Alsace-Moselle en a deux de plus).
+
+```catala-metadata
+déclaration champ d'application JourOuvrable:
+  entrée dernier_jour contenu date
+  entrée jours_fériés_ou_chômés contenu liste de date
+  interne est_ouvrable contenu booléen dépend de candidat contenu date
+  résultat fin contenu date
+
+champ d'application JourOuvrable:
+  définition est_ouvrable de candidat égal à
+    non (jours_fériés_ou_chômés contient candidat)
+    et (selon (Date.jour_de_la_semaine de candidat) sous forme
+        -- Samedi: faux
+        -- Dimanche: faux
+        -- n'importe quel: vrai)
+
+  # Le règlement, art. 3(5) (« tout délai de deux jours ou plus comporte au moins
+  # deux jours ouvrables »), n'est pas repris par L. 221-19 et n'est pas encodé : il
+  # ne joue que si 13 des 14 jours du délai sont fériés ou chômés.
+  # Le premier jour ouvrable parmi le dernier jour et les 31 qui le suivent : aucune
+  # suite de samedis, dimanches et jours fériés n'en compte autant. Une liste de jours chômés qui en
+  # couvrirait 32 de suite fait échouer l'assertion, plutôt qu'une fin fausse.
+  assertion est_ouvrable de fin
+  définition fin égal à
+    minimum de
+      (liste de candidat parmi
+         (transforme chaque n parmi Liste.séquence de 0, 32 en
+            (dernier_jour + 1 jour * n))
+       tel que est_ouvrable de candidat)
+    ou si liste vide alors dernier_jour
+```
+
+## Le délai
+
+### Article L. 221-18
+
+Le consommateur dispose d'un délai de quatorze jours pour exercer son droit de
+rétractation d'un contrat conclu à distance, à la suite d'un démarchage téléphonique
+ou hors établissement, sans avoir à motiver sa décision ni à supporter d'autres coûts
+que ceux prévus aux articles L. 221-23 à L. 221-25.
+
+```catala-metadata
+déclaration champ d'application DélaiDeRétractation:
+  entrée type_de_contrat contenu TypeDeContrat
+  entrée date_de_conclusion contenu date
+  entrée modalité_de_livraison contenu ModalitéDeLivraison
+  # Les jours de réception par le consommateur ou le tiers qu'il désigne, autre que
+  # le transporteur ; un seul pour un seul bien.
+  entrée dates_de_réception contenu liste de date
+  # Vrai quand tous les biens, lots ou pièces de la commande sont reçus ; sans effet
+  # pour un seul bien et pour la livraison régulière, qui court du premier.
+  entrée réception_complète contenu booléen
+  entrée information contenu InformationSurLeDroit
+  entrée cas_l221_28 contenu liste de CasL22128
+  entrée jours_fériés_ou_chômés contenu liste de date
+
+  # Faux quand le contrat relève d'un des huit cas de L. 221-28 qui tiennent à son
+  # type ; les cinq cas datés laissent le droit exister jusqu'à leur date.
+  résultat droit_de_rétractation contenu booléen
+  # Vrai sauf pour un bien qui n'a pas encore été reçu.
+  résultat délai_commencé contenu booléen
+  # Sans objet, ainsi que `fin_du_délai_initial`, quand le délai n'a pas commencé :
+  # ils sont alors calculés depuis la conclusion et ne doivent pas être lus.
+  résultat jour_de_départ contenu date
+  résultat fin_du_délai_initial contenu date
+  résultat fin_du_délai contenu FinDuDélai
+  résultat dans_le_délai contenu Verdict dépend de date_d_envoi contenu date
+
+  interne exclu_par_son_type contenu booléen
+  interne après_une_réception contenu booléen dépend de jour_d_événement contenu date
+  interne perdu_avant contenu booléen dépend de jour_d_envoi contenu date
+  interne perdu_le_jour contenu booléen dépend de jour_d_envoi contenu date
+
+  fin_initiale champ d'application JourOuvrable
+  fin_prolongation champ d'application JourOuvrable
+  fin_après_information champ d'application JourOuvrable
+  fin_douze_mois_du_départ champ d'application JourOuvrable
+```
+
+```catala
+champ d'application DélaiDeRétractation:
+  définition droit_de_rétractation égal à vrai
+```
+
+Le délai mentionné au premier alinéa court à compter du jour :
+
+1° De la conclusion du contrat, pour les contrats de prestation de services et ceux
+mentionnés à l'article L. 221-4 ;
+
+2° De la réception du bien par le consommateur ou un tiers, autre que le
+transporteur, désigné par lui, pour les contrats de vente de biens. Pour les contrats
+conclus hors établissement, le consommateur peut exercer son droit de rétractation à
+compter de la conclusion du contrat.
+
+Dans le cas d'une commande portant sur plusieurs biens livrés séparément ou dans le
+cas d'une commande d'un bien composé de lots ou de pièces multiples dont la livraison
+est échelonnée sur une période définie, le délai court à compter de la réception du
+dernier bien ou lot ou de la dernière pièce.
+
+Pour les contrats prévoyant la livraison régulière de biens pendant une période
+définie, le délai court à compter de la réception du premier bien.
+
+```catala
+champ d'application DélaiDeRétractation:
+  # 1°
+  définition jour_de_départ égal à date_de_conclusion
+
+  # 2°, et ses deux cas particuliers. Pour un seul bien, la liste a un élément ;
+  # le dernier et le premier sont alors le même jour. Une liste vide : le bien n'est
+  # pas reçu, le délai n'a pas commencé (`délai_commencé`), et le jour de départ
+  # retombe sur la conclusion sans être lu. De même pour une commande en plusieurs
+  # biens ou lots tant que le dernier n'est pas reçu (`réception_complète`).
+  définition délai_commencé égal à
+    non (type_de_contrat = VenteDeBiens)
+    ou (nombre de dates_de_réception > 0
+        et (réception_complète
+            ou modalité_de_livraison = UnSeulBien
+            ou modalité_de_livraison = LivraisonRégulièrePendantUnePériode))
+
+  exception définition jour_de_départ
+    sous condition type_de_contrat = VenteDeBiens
+    conséquence égal à
+      selon modalité_de_livraison sous forme
+      -- LivraisonRégulièrePendantUnePériode:
+        minimum de dates_de_réception ou si liste vide alors date_de_conclusion
+      -- n'importe quel:
+        maximum de dates_de_réception ou si liste vide alors date_de_conclusion
+```
+
+### Article L. 221-19
+
+Conformément au règlement n° 1182/71/CEE du Conseil du 3 juin 1971 portant
+détermination des règles applicables aux délais, aux dates et aux termes :
+
+1° Le jour où le contrat est conclu ou le jour de la réception du bien n'est pas
+compté dans le délai mentionné à l'article L. 221-18 ;
+
+2° Le délai commence à courir au début de la première heure du premier jour et prend
+fin à l'expiration de la dernière heure du dernier jour du délai ;
+
+3° Si ce délai expire un samedi, un dimanche ou un jour férié ou chômé, il est prorogé
+jusqu'au premier jour ouvrable suivant.
+
+```catala
+champ d'application DélaiDeRétractation:
+  # 1° et 2° : le jour de départ n'est pas compté, le quatorzième jour suivant est
+  # le dernier, compris en entier.
+  définition fin_initiale.dernier_jour égal à jour_de_départ + 14 jour
+  définition fin_initiale.jours_fériés_ou_chômés égal à jours_fériés_ou_chômés
+  # 3°
+  définition fin_du_délai_initial égal à fin_initiale.fin
+```
+
+### Article L. 221-20
+
+Lorsque les informations relatives au droit de rétractation n'ont pas été fournies au
+consommateur dans les conditions prévues au 7° de l'article L. 221-5, le délai de
+rétractation est prolongé de douze mois à compter de l'expiration du délai de
+rétractation initial, déterminé conformément à l'article L. 221-18.
+
+Toutefois, lorsque la fourniture de ces informations intervient pendant cette
+prolongation, le délai de rétractation expire au terme d'une période de quatorze
+jours à compter du jour où le consommateur a reçu ces informations.
+
+Les douze mois se comptent selon le règlement n° 1182/71, art. 3 : le jour de
+l'événement, ici l'expiration du délai initial, « n'est pas compté » (3(1)) ; le délai
+court du lendemain et « prend fin à l'expiration de la dernière heure du jour qui,
+[...] dans le dernier mois, [...] porte [...] le même chiffre que le jour de départ »
+(3(2)(c)). Le jour de départ est celui de l'événement, comme pour les jours (un délai
+de quatorze jours à compter du 5 finit le 19, L. 221-19) : douze mois à compter du 19
+novembre 2026 finissent le 19 novembre 2027. Si ce chiffre manque dans le dernier
+mois, le délai finit le dernier jour de ce mois : l'arrondi inférieur de Catala.
+
+**Lecture retenue :** « l'expiration du délai de rétractation initial, déterminé
+conformément à l'article L. 221-18 » est son expiration après la prorogation de
+L. 221-19, 3°, puisque L. 221-19 est la règle de calcul du « délai mentionné à
+l'article L. 221-18 », et que le règlement s'applique au délai de l'article 9(2) de
+la directive (considérant 41). L'autre lecture, compter les douze mois du
+quatorzième jour avant prorogation, change la fin d'un ou deux jours quand le délai
+initial a été prorogé. À confirmer par l'agent juridique.
+
+La fenêtre de la directive, « douze mois à compter du jour visé à l'article 9,
+paragraphe 2 », est un délai du même règlement : elle est prorogée de la même façon.
+
+```catala
+champ d'application DélaiDeRétractation:
+  date arrondi inférieur
+
+  définition fin_prolongation.dernier_jour égal à
+    fin_du_délai_initial + 12 mois
+  définition fin_prolongation.jours_fériés_ou_chômés égal à jours_fériés_ou_chômés
+
+  définition fin_douze_mois_du_départ.dernier_jour égal à jour_de_départ + 12 mois
+  définition fin_douze_mois_du_départ.jours_fériés_ou_chômés égal à
+    jours_fériés_ou_chômés
+
+  définition fin_après_information.dernier_jour égal à
+    selon information sous forme
+    -- FournieAprèsLaConclusion contenu tardive: tardive.reçue_le + 14 jour
+    -- n'importe quel: fin_du_délai_initial
+  définition fin_après_information.jours_fériés_ou_chômés égal à
+    jours_fériés_ou_chômés
+
+  # Les dates d'un cas viennent dans l'ordre : réception après la conclusion, un seul
+  # jour pour un seul bien ; un événement de L. 221-28 après la conclusion, et, pour
+  # le 5°, le 6° et le 9° (« après la livraison »), après une réception. Le 1° ne vise
+  # qu'un service, le 13° qu'un contenu numérique (L. 221-4), le 5°, le 6° et le 9° que
+  # des biens reçus. Une information « tardive » fournie le jour de la conclusion est
+  # acceptée : qu'elle l'ait été avant la conclusion, ce jour-là, est un fait du cas.
+  assertion
+    (pour tout r parmi dates_de_réception on a r >= date_de_conclusion)
+    et (modalité_de_livraison != UnSeulBien ou nombre de dates_de_réception <= 1)
+  assertion
+    pour tout cas parmi cas_l221_28 on a
+      selon cas sous forme
+      -- Al1ServicePleinementExécuté contenu d:
+        d >= date_de_conclusion et type_de_contrat = PrestationDeServices
+      -- Al13ContenuNumériqueCommencé contenu d:
+        d >= date_de_conclusion et type_de_contrat = FournitureArticleL2214
+      -- Al5BienDescelléHygiène contenu d: après_une_réception de d
+      -- Al6BienMélangéIndissociablement contenu d: après_une_réception de d
+      -- Al9EnregistrementOuLogicielDescellé contenu d: après_une_réception de d
+      -- n'importe quel: vrai
+
+  définition après_une_réception de jour_d_événement égal à
+    type_de_contrat = VenteDeBiens
+    et (existe r parmi dates_de_réception tel que r <= jour_d_événement)
+
+  # Une information tardive n'est pas fournie avant la conclusion (elle serait alors
+  # `FournieAvantLaConclusion`), ni reçue avant d'être fournie.
+  assertion
+    selon information sous forme
+    -- FournieAprèsLaConclusion contenu tardive:
+      tardive.fournie_le >= date_de_conclusion
+      et tardive.reçue_le >= tardive.fournie_le
+    -- n'importe quel: vrai
+
+  # L'information donnée avant la conclusion : le délai initial.
+  définition fin_du_délai égal à Le contenu fin_du_délai_initial
+
+  étiquette l221_20 exception définition fin_du_délai
+    sous condition information = JamaisFournie
+    conséquence égal à Le contenu fin_prolongation.fin
+
+  # L'information tardive : cinq cas, selon le jour où elle est fournie (F), avec D
+  # le jour de départ, I la fin du délai initial, P la fin de la prolongation et W la
+  # fin des douze mois comptés de D. Ils couvrent toutes les dates sans se recouvrir.
+  étiquette l221_20 exception définition fin_du_délai
+    sous condition
+      selon information sous forme
+      -- FournieAprèsLaConclusion contenu tardive: vrai
+      -- n'importe quel: faux
+    conséquence égal à
+      selon information sous forme
+      -- FournieAprèsLaConclusion contenu tardive:
+        (soit f égal à tardive.fournie_le dans
+         # F <= D : ni L. 221-20, al. 2 (pas pendant la prolongation), ni la
+         # directive, art. 10(2) : la fenêtre de douze mois « à compter du jour
+         # visé » ne compte pas ce jour (règlement 1182/71, art. 3(1)) et s'ouvre le
+         # lendemain. Les deux textes donnent la prolongation entière.
+         si f <= jour_de_départ alors Le contenu fin_prolongation.fin
+         # D < F <= I : les deux textes divergent.
+         sinon si f <= fin_du_délai_initial alors
+           NonDécidéParLeTexte contenu Fourchette {
+             -- question: InformationFournieAvantLaProlongation
+             -- au_plus_tôt: Date.min de fin_après_information.fin, fin_prolongation.fin
+             -- au_plus_tard: Date.max de fin_après_information.fin, fin_prolongation.fin
+           }
+         # F > P : l'information arrive après l'expiration du délai prolongé.
+         sinon si f > fin_prolongation.fin alors Le contenu fin_prolongation.fin
+         # I < F <= P et F <= W : les deux textes donnent quatorze jours.
+         sinon si f <= fin_douze_mois_du_départ.fin alors
+           Le contenu fin_après_information.fin
+         # I < F <= P et F > W : les deux textes divergent.
+         sinon NonDécidéParLeTexte contenu Fourchette {
+             -- question: InformationFournieAprèsDouzeMoisDuDépart
+             -- au_plus_tôt: Date.min de fin_après_information.fin, fin_prolongation.fin
+             -- au_plus_tard: Date.max de fin_après_information.fin, fin_prolongation.fin
+           })
+      -- n'importe quel: Le contenu fin_du_délai_initial
+
+  # Un bien pas encore reçu : le délai n'a pas commencé.
+  étiquette pas_commencé exception l221_20 définition fin_du_délai
+    sous condition non délai_commencé
+    conséquence égal à PasEncoreCommencé
+```
+
+### Article L. 221-28
+
+Le droit de rétractation ne peut être exercé pour les contrats énumérés aux 1° à 13°
+de l'article (le texte entier est dans `sources/conso-L221-28.txt`). Pour Odophone,
+deux cas comptent : le 3°, « fourniture de biens confectionnés selon les
+spécifications du consommateur ou nettement personnalisés », et le 5°, « biens qui
+ont été descellés par le consommateur après la livraison et qui ne peuvent être
+renvoyés pour des raisons d'hygiène ou de protection de la santé ». Que tel parfum
+soit « nettement personnalisé » est un fait du cas, établi hors de ce module.
+
+Le 3° tient au contrat : le droit n'existe pas. Le 5° tient à un événement : le droit
+existe jusqu'au descellement, qui le fait perdre (de même 1°, 6°, 9° et 13°).
+
+```catala
+champ d'application DélaiDeRétractation:
+  définition exclu_par_son_type égal à
+    existe cas parmi cas_l221_28 tel que
+      selon cas sous forme
+      -- Al1ServicePleinementExécuté contenu d: faux
+      -- Al5BienDescelléHygiène contenu d: faux
+      -- Al6BienMélangéIndissociablement contenu d: faux
+      -- Al9EnregistrementOuLogicielDescellé contenu d: faux
+      -- Al13ContenuNumériqueCommencé contenu d: faux
+      -- n'importe quel: vrai
+
+  définition perdu_avant de jour_d_envoi égal à
+    existe cas parmi cas_l221_28 tel que
+      selon cas sous forme
+      -- Al1ServicePleinementExécuté contenu d: d < jour_d_envoi
+      -- Al5BienDescelléHygiène contenu d: d < jour_d_envoi
+      -- Al6BienMélangéIndissociablement contenu d: d < jour_d_envoi
+      -- Al9EnregistrementOuLogicielDescellé contenu d: d < jour_d_envoi
+      -- Al13ContenuNumériqueCommencé contenu d: d < jour_d_envoi
+      -- n'importe quel: faux
+
+  définition perdu_le_jour de jour_d_envoi égal à
+    existe cas parmi cas_l221_28 tel que
+      selon cas sous forme
+      -- Al1ServicePleinementExécuté contenu d: d = jour_d_envoi
+      -- Al5BienDescelléHygiène contenu d: d = jour_d_envoi
+      -- Al6BienMélangéIndissociablement contenu d: d = jour_d_envoi
+      -- Al9EnregistrementOuLogicielDescellé contenu d: d = jour_d_envoi
+      -- Al13ContenuNumériqueCommencé contenu d: d = jour_d_envoi
+      -- n'importe quel: faux
+
+  exception définition droit_de_rétractation
+    sous condition exclu_par_son_type
+    conséquence égal à faux
+
+  exception pas_commencé définition fin_du_délai
+    sous condition exclu_par_son_type
+    conséquence égal à PasDeDroit
+```
+
+## L'exercice du droit
+
+### Article L. 221-21, premier alinéa
+
+Le consommateur exerce son droit de rétractation en informant le professionnel de sa
+décision de se rétracter par l'envoi, avant l'expiration du délai prévu à l'article
+L. 221-18, du formulaire de rétractation mentionné au 7° de l'article L. 221-5 ou de
+toute autre déclaration, dénuée d'ambiguïté, exprimant sa volonté de se rétracter.
+
+L. 221-21 renvoie au « délai prévu à l'article L. 221-18 » ; L. 221-20 dit que ce même
+délai « est prolongé ». Le délai prolongé est donc celui dans lequel l'envoi doit être
+fait.
+
+Le délai expire à la dernière heure de son dernier jour (L. 221-19, 2°) : un envoi
+fait ce jour-là est fait avant l'expiration. Un envoi fait avant la conclusion n'est
+pas l'exercice d'un droit né du contrat. Le délai commence « au début de la première
+heure du premier jour » (L. 221-19, 2°), le lendemain du jour de départ, qui « n'est
+pas compté » (1°). Mais L. 221-21 ne fixe qu'une borne à l'envoi, « avant
+l'expiration » : rien n'interdit un envoi le jour de départ, pour un bien comme pour
+un service, et il est rendu dans le délai. Une seule phrase pourrait l'interdire plus
+tôt : L. 221-18, 2°, ne permet l'exercice « à compter de la conclusion » que « pour les
+contrats conclus hors établissement ». A contrario, pour un bien vendu à distance,
+un envoi fait avant la réception serait prématuré. Le texte ne tranche pas entre
+cette lecture et la seule borne de L. 221-21 : un envoi fait après la conclusion et
+avant le jour de départ d'un bien est rendu non décidé. La phrase est dans le 2°, sur
+les ventes de biens : elle ne touche pas les services.
+
+Quand plusieurs questions restent ouvertes pour un même envoi, la première dans
+l'ordre des conditions ci-dessous est rendue.
+
+```catala
+champ d'application DélaiDeRétractation:
+  définition dans_le_délai de date_d_envoi égal à
+    si exclu_par_son_type alors Non
+    sinon si date_d_envoi < date_de_conclusion alors Non
+    # Après l'expiration, l'ordre des événements du jour n'importe plus.
+    sinon si
+      (selon fin_du_délai sous forme
+       -- Le contenu dernier_jour: date_d_envoi > dernier_jour
+       -- NonDécidéParLeTexte contenu f: date_d_envoi > f.au_plus_tard
+       -- n'importe quel: faux)
+    alors Non
+    sinon si perdu_avant de date_d_envoi alors Non
+    sinon si perdu_le_jour de date_d_envoi alors
+      NonDécidé contenu PerteDuDroitLeJourDeLEnvoi
+    sinon si non délai_commencé
+      ou (type_de_contrat = VenteDeBiens et date_d_envoi < jour_de_départ)
+    alors
+      NonDécidé contenu EnvoiAvantLOuvertureDuDélai
+    sinon
+      selon fin_du_délai sous forme
+      -- PasDeDroit: Non
+      -- PasEncoreCommencé: NonDécidé contenu EnvoiAvantLOuvertureDuDélai
+      -- Le contenu dernier_jour:
+        si date_d_envoi <= dernier_jour alors Oui sinon Non
+      -- NonDécidéParLeTexte contenu f:
+        si date_d_envoi <= f.au_plus_tôt alors Oui
+        sinon NonDécidé contenu f.question
+```
