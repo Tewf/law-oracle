@@ -7,6 +7,8 @@ A pin move is recorded here, not in decisions/.
 
 ### Added
 
+- The disagreement enumerator, `disagree/`: a grid engine and a Z3 engine over one report, 13 tests on an invented provision, and decision 0004.
+
 - The site: Quarto renders the README and every page, with the standard's stylesheet at its pin, and `pages.yml`
   publishes it to https://tewf.github.io/law-oracle/ on every push to master, as the family's other members do.
 
