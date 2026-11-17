@@ -32,7 +32,7 @@ Every work cited in this repository, once. A key is `Surname Year`. The note aft
 | Kordjamshidi 2026 | Kordjamshidi, P., Aslan, S., Seshadri, M., Barrett, L., Santus, E. (2026). Reasoners or translators? Contamination-aware evaluation and neuro-symbolic robustness in tax law. Abstract read | arXiv:2605.16052 |
 | Kouteili 2026 | Kouteili, S. et al. (2026). DeoGen: automatic benchmark generation for reasoning over policies. Abstract read | arXiv:2610.38687 |
 | Kowalski 2021 | Kowalski, R., Datoo, A. (2021). Logical English meets legal English for swaps and derivatives. Artificial Intelligence and Law. Search summary read | https://doi.org/10.1007/s10506-021-09295-3 |
-| lawlib 2026 | lawlib: a formal library of law in Lean 4. Search snippets only; repository unreachable on 12 Nov. 2026. Unverifiable | https://github.com/than4213/lawlib |
+| lawlib 2026 | lawlib: a formal library of law in Lean 4. Search snippets only; repository `than4213/lawlib` on GitHub answered 404 on 12 and 17 Nov. 2026. Unverifiable, so no link | none |
 | Lawsky 2017 | Lawsky, S. B. (2017). A logic for statutes. Florida Tax Review 21(1). Search summary read | https://scholarship.law.ufl.edu/ftr/vol21/iss1/2/ |
 | LogicalEnglish 2026 | LogicalContractsOrg (2026). LogicalEnglish and LogicalEnglish2 repositories. Metadata read | https://github.com/LogicalContractsOrg/LogicalEnglish |
 | Lorenzo 2025 | Lorenzo, G., Pietromatera, A., Holzenberger, N. (2025). Translating tax law to code with LLMs: a benchmark and evaluation framework. NLLP 2025, 31-47. Abstract read | https://aclanthology.org/2025.nllp-1.4/ |
