@@ -1,0 +1,23 @@
+champ d'application PrestationsFamiliales:
+  étiquette cas_base
+  règle droit_ouvert de enfant
+  sous condition
+    enfant.obligation_scolaire sous forme SituationObligationScolaire.Avant
+    ou enfant.obligation_scolaire sous forme SituationObligationScolaire.Pendant
+  conséquence rempli
+
+champ d'application PrestationsFamiliales:
+  étiquette cas_base
+  règle droit_ouvert de enfant
+  sous condition
+    enfant.obligation_scolaire sous forme SituationObligationScolaire.Après
+    et (enfant.rémuneration_mensuelle <= plafond_l512_3_2)
+    et (enfant.date_de_naissance + âge_l512_3_2 > date_courante)
+  conséquence rempli
+
+champ d'application PrestationsFamiliales:
+  définition âge_l512_3_2 égal à 20 an
+
+champ d'application PrestationsFamiliales:
+  définition plafond_l512_3_2 égal à
+    (smic.brut_horaire * 55%) * 169,0
