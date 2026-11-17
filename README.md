@@ -57,7 +57,7 @@ digraph verdict {
 - **Its decisions take the record shape of [reader-ergonomics-software-design](https://github.com/Tewf/reader-ergonomics-software-design)**, v1.1.0.
 - **[ai-augmented-law-oracle](https://github.com/Tewf/ai-augmented-law-oracle)** is its sibling: a model translates
   statutes into code and verdicts into words, judged by this repository's checks.
-- **It obeys [reader-ergonomics](https://github.com/Tewf/reader-ergonomics/blob/65e42472e2d4cbfd994c2a86e95a47e5dc7301ca/standard.md)** (v1.24.2) and runs its checks in CI.
+- **It obeys [reader-ergonomics](https://github.com/Tewf/reader-ergonomics/blob/722cfa4b0ad65968e2c7e6fdc07057c9bab0e172/standard.md)** (v1.24.3) and runs its checks in CI.
 
 ## Scope
 
