@@ -7,6 +7,7 @@ A pin move is recorded here, not in decisions/.
 
 ### Changed
 
+- The licence of new code: AGPL-3.0-or-later from decision 0004; what is published stays Apache-2.0.
 - Pinned reader-ergonomics v1.24.3 (`722cfa4`), from v1.24.2 (`65e4247`): a server error is a warning in the online
   reference run, so a site that is down no longer fails the weekly job.
 

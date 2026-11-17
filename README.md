@@ -98,4 +98,6 @@ Three deliverables, each a measure another project can rely on. None is started.
 
 ## Licence
 
-Code under the [Apache License 2.0](LICENSE); prose under [CC BY 4.0](LICENSES/CC-BY-4.0.txt).
+Code published before [decision 0004](decisions/0004-new-code-under-agpl-published-code-stays-apache.md) stays under the [Apache License 2.0](LICENSE);
+code added since opens with `SPDX-License-Identifier: AGPL-3.0-or-later` and is under the
+[GNU AGPL 3.0 or later](LICENSES/AGPL-3.0-or-later.txt). Prose under [CC BY 4.0](LICENSES/CC-BY-4.0.txt).
