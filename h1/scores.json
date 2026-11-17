@@ -1,0 +1,1123 @@
+{
+ "Ouverture_M1": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M2": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M3": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M4": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M5": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M6": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M7": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M8": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M9": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_M10": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_X1": {
+  "cases": 19440,
+  "agree": 19047,
+  "share": 0.979783950617284,
+  "model_raises": 0,
+  "first_disagreements": [
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1998-12-31",
+     "years": "20",
+     "offset": "-1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1998-01-02",
+     "years": "21",
+     "offset": "1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1998-12-31",
+     "years": "20",
+     "offset": "-1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1998-01-02",
+     "years": "21",
+     "offset": "1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "700",
+     "born": "1998-12-31",
+     "years": "20",
+     "offset": "-1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "700",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "700",
+     "born": "1998-01-02",
+     "years": "21",
+     "offset": "1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "800",
+     "born": "1998-12-31",
+     "years": "20",
+     "offset": "-1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "800",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "800",
+     "born": "1998-01-02",
+     "years": "21",
+     "offset": "1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "1998-12-31",
+     "years": "20",
+     "offset": "-1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "1998-01-02",
+     "years": "21",
+     "offset": "1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1998-12-31",
+     "years": "20",
+     "offset": "-1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1998-01-02",
+     "years": "21",
+     "offset": "1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1998-12-31",
+     "years": "20",
+     "offset": "-1"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   }
+  ]
+ },
+ "Ouverture_X2": {
+  "cases": 19440,
+  "agree": 19309,
+  "share": 0.993261316872428,
+  "model_raises": 0,
+  "first_disagreements": [
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "700",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "800",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "700",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Guadeloupe",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Guadeloupe",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Guadeloupe",
+     "situation": "Apres",
+     "pay": "700",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Guadeloupe",
+     "situation": "Apres",
+     "pay": "800",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Guadeloupe",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "1999-01-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-07-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1999-07-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-07-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1999-07-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-07-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "700",
+     "born": "1999-07-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-07-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "800",
+     "born": "1999-07-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-07-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "1999-07-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-07-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "0",
+     "born": "1999-07-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-07-01",
+     "residence": "Mayotte",
+     "situation": "Apres",
+     "pay": "400",
+     "born": "1999-07-01",
+     "years": "20",
+     "offset": "0"
+    },
+    "reference": [
+     "no"
+    ],
+    "model": [
+     "yes"
+    ]
+   }
+  ]
+ },
+ "Ouverture_X3": {
+  "cases": 19440,
+  "agree": 19440,
+  "share": 1.0,
+  "model_raises": 0,
+  "first_disagreements": []
+ },
+ "Ouverture_X4": {
+  "cases": 19440,
+  "agree": 18868,
+  "share": 0.9705761316872428,
+  "model_raises": 0,
+  "first_disagreements": [
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2015-12-31",
+     "years": "3",
+     "offset": "-1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2016-01-01",
+     "years": "3",
+     "offset": "0"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2016-01-02",
+     "years": "3",
+     "offset": "1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2008-12-31",
+     "years": "10",
+     "offset": "-1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2009-01-01",
+     "years": "10",
+     "offset": "0"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2009-01-02",
+     "years": "10",
+     "offset": "1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2003-12-31",
+     "years": "15",
+     "offset": "-1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2004-01-01",
+     "years": "15",
+     "offset": "0"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2004-01-02",
+     "years": "15",
+     "offset": "1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2002-12-31",
+     "years": "16",
+     "offset": "-1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2003-01-01",
+     "years": "16",
+     "offset": "0"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2003-01-02",
+     "years": "16",
+     "offset": "1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2001-12-31",
+     "years": "17",
+     "offset": "-1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2002-01-01",
+     "years": "17",
+     "offset": "0"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2002-01-02",
+     "years": "17",
+     "offset": "1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2000-12-31",
+     "years": "18",
+     "offset": "-1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2001-01-01",
+     "years": "18",
+     "offset": "0"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2001-01-02",
+     "years": "18",
+     "offset": "1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "1999-12-31",
+     "years": "19",
+     "offset": "-1"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   },
+   {
+    "case": {
+     "date": "2019-01-01",
+     "residence": "Metropole",
+     "situation": "Apres",
+     "pay": "900",
+     "born": "2000-01-01",
+     "years": "19",
+     "offset": "0"
+    },
+    "reference": [
+     "yes"
+    ],
+    "model": [
+     "no"
+    ]
+   }
+  ]
+ }
+}
